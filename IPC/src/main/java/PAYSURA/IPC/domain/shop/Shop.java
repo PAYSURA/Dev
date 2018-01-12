@@ -1,4 +1,4 @@
-package PAYSURA.IPC.entity.shop;
+package PAYSURA.IPC.domain.shop;
 
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;

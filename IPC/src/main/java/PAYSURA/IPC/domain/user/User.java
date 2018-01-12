@@ -1,4 +1,4 @@
-package PAYSURA.IPC.entity.user;
+package PAYSURA.IPC.domain.user;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Property;
 
-import PAYSURA.IPC.entity.user.bill.Bill;
+import PAYSURA.IPC.domain.user.bill.Bill;
 import lombok.Data;
 
 @NodeEntity
