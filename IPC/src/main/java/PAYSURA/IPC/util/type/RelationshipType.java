@@ -11,6 +11,7 @@ package PAYSURA.IPC.util.type;
 public class RelationshipType {
 
 	public static final String BELONGS_TO ="BELONGS_TO";
+	public static final String HAS_A ="HAS_A";
 	
 	/**
 	 * Private Constructor.

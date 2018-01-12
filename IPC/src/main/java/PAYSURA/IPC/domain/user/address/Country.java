@@ -3,6 +3,8 @@
  */
 package PAYSURA.IPC.domain.user.address;
 
+import java.util.Locale;
+
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Property;
@@ -28,7 +30,7 @@ public class Country {
 	 * Private no arg constructor.
 	 */
 	public Country() {
-		this("");
+		this(null);
 	}
 
 	/**
@@ -37,9 +39,12 @@ public class Country {
 	 * @param name
 	 *            The name of the country
 	 */
-	public Country(final String name) {
+	public Country(final Locale name) {
 		super();
-		this.setName(name);
+		if (null != name) {
+			this.setName(name.getCountry());
+		}
+
 	}
 
 }

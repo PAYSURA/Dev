@@ -3,12 +3,14 @@ package PAYSURA.IPC.domain.user;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.tomcat.jni.Address;
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Property;
+import org.neo4j.ogm.annotation.Relationship;
 
+import PAYSURA.IPC.domain.user.address.Address;
 import PAYSURA.IPC.domain.user.bill.Bill;
+import PAYSURA.IPC.util.type.RelationshipType;
 import lombok.Data;
 
 @NodeEntity
@@ -19,6 +21,7 @@ public class User {
 	Long id;
 
 	@Property(name = "SmartContractAdress")
+	@Relationship(type = RelationshipType.HAS_A, direction = Relationship.UNDIRECTED)
 	private Address scAdresse;
 
 	@SuppressWarnings("rawtypes")
