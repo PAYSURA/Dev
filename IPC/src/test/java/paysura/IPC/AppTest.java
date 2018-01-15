@@ -1,4 +1,4 @@
-package PAYSURA.IPC;
+package paysura.IPC;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

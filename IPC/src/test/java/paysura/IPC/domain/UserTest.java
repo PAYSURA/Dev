@@ -1,7 +1,7 @@
 /**
  * 
  */
-package PAYSURA.IPC.domain;
+package paysura.IPC.domain;
 
 import static org.junit.Assert.assertNotEquals;
 
