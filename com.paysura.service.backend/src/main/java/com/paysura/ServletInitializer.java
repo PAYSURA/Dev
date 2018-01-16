@@ -1,4 +1,4 @@
-package com.paysura.service.backend;
+package com.paysura;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
