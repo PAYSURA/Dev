@@ -11,8 +11,11 @@ import junit.framework.TestCase;
  */
 public class CredentialTest extends TestCase {
 
-	private static final String SECURE_PWD_TEST1234 = "2bbe0c48b91a7d1b8a6753a8b9cbe1db16b84379f3f91fe115621284df7a48f1cd71e9beb90ea614c7bd924250aa9e446a866725e685a65df5d139a5cd180dc9";
+	private static final String SECURE_PWD_TEST1234 = "cc602288481ccc9e79521501a29502671a762bb75cc146f3646cac438680824d5bad37d2a20560c72c8c01d5ae2c3217fc29b209e4b6f1b05de0993baecd68e6";
 
+	/**
+	 * Tests, if the credential will be hashed into SHA-512 successfully.
+	 */
 	public void testSecuredPassword() {
 		Credential credential = new Credential("test@test.de", "test1234");
 		assertNotEquals(credential.getPassword(), "test1234");
