@@ -3,11 +3,14 @@ package com.paysura.domain.user;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Transient;
+
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Property;
 import org.neo4j.ogm.annotation.Relationship;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.paysura.domain.user.address.Address;
 import com.paysura.domain.user.bill.Bill;
 import com.paysura.util.type.RelationshipType;
@@ -19,8 +22,11 @@ import lombok.Data;
 public class User {
 
 	@GraphId
+    @Transient
+    @JsonIgnoreProperties
 	Long id;
 
+	@Property(name="Token")
 	private String token;
 
 	@Property(name = "SmartContractAdress")

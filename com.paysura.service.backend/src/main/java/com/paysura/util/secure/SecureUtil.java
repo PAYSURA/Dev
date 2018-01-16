@@ -7,6 +7,9 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,6 +50,27 @@ public final class SecureUtil {
 			LOGGER.error("No such encoding: {}", SecureUtil.ENCODING, e);
 		}
 		return generatedPassword;
+	}
+
+	/**
+	 * Checks if an email address is valid or not.
+	 * 
+	 * @param email
+	 *            The email address.
+	 * @return True, if success, false else.
+	 */
+	public static boolean isEmailValid(final String email) {
+		boolean result = false;
+		if (email != null && !email.isEmpty()) {
+			try {
+				InternetAddress emailAddr = new InternetAddress(email);
+				emailAddr.validate();
+				result = true;
+			} catch (AddressException ex) {
+				result = false;
+			}
+		}
+		return result;
 	}
 
 	/**
