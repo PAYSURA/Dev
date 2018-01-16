@@ -39,7 +39,7 @@ public class Credential implements Serializable {
 	 */
 	public Credential(final String email, final String password) {
 		this.setEmail(email);
-		this.setPassword(SecureUtil.parseSecure(password));
+		this.setPassword(SecureUtil.hashPassword(password));
 	}
 
 }

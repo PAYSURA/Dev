@@ -18,25 +18,23 @@ import org.slf4j.LoggerFactory;
  */
 public final class SecureUtil {
 
-	private static final String PREFIX = "";
-	private static final String POSTFIX = "";
-	private static final String ALG = "SHA-512";
-	private static final String ENCODING = "UTF-8";
 	private static final Logger LOGGER = LoggerFactory.getLogger(SecureUtil.class);
+	private static final String PREFIX = "45.T@2,10kCy";
+	private static final String ENCODING = "UTF-8";
+	private static final String ALG = "SHA-512";
 
 	/**
-	 * Updates an plain text password into an SHA-512 hashed.
+	 * Turns an plain text password into an SHA-512 password.
 	 * 
 	 * @param password
-	 *            The plain text password.
-	 * @return SHA-512 encoded password.
+	 *            Plain text password.
+	 * @return Hashed Password.
 	 */
-	public static final String parseSecure(final String password) {
+	public static final String hashPassword(final String password) {
 		String generatedPassword = null;
 		try {
 			MessageDigest md = MessageDigest.getInstance(SecureUtil.ALG);
 			md.update(SecureUtil.PREFIX.getBytes(SecureUtil.ENCODING));
-			md.update(SecureUtil.POSTFIX.getBytes(SecureUtil.ENCODING));
 			byte[] bytes = md.digest(password.getBytes(SecureUtil.ENCODING));
 			StringBuilder sb = new StringBuilder();
 			for (int i = 0; i < bytes.length; i++) {
@@ -44,15 +42,15 @@ public final class SecureUtil {
 			}
 			generatedPassword = sb.toString();
 		} catch (NoSuchAlgorithmException e) {
-			LOGGER.error("Alghorithmn does not exist", e);
+			LOGGER.error("No such algorithmn: {}", SecureUtil.ALG, e);
 		} catch (UnsupportedEncodingException e) {
-			LOGGER.error("THe encoding does not exists", e);
+			LOGGER.error("No such encoding: {}", SecureUtil.ENCODING, e);
 		}
 		return generatedPassword;
 	}
 
 	/**
-	 * Private no-arg constructor.
+	 * Privaet no-arg construtor.
 	 */
 	private SecureUtil() {
 
