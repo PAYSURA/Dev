@@ -3,7 +3,6 @@
  */
 package com.paysura.controller.secure;
 
-import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -47,7 +46,7 @@ public class SecureController {
 	@PostMapping
 	public ResponseEntity<User> login(@Validated(Credential.New.class) @RequestBody final Credential credential) {
 		ResponseEntity<User> response;
-		
+
 		return response;
 	}
 
