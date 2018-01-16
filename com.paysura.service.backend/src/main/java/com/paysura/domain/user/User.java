@@ -21,13 +21,14 @@ public class User {
 	@GraphId
 	Long id;
 
+	private String token;
+
 	@Property(name = "SmartContractAdress")
 	@Relationship(type = RelationshipType.HAS_A, direction = Relationship.UNDIRECTED)
 	private Address scAdresse;
 
-	@SuppressWarnings("rawtypes")
 	@Property(name = "bills")
-	private List[] bills;
+	private List<Bill> bills;
 
 	@Property(name = "IPC")
 	private float ipc_values;
@@ -42,15 +43,34 @@ public class User {
 	/**
 	 * Advanced constructor.
 	 * 
-	 * @param adress
+	 * @param address
 	 *            The address entity.
 	 * @param bills
 	 *            {@link List} of {@link Bill}'s.
 	 * @param ipc_values
 	 *            The amount of the ipc values.
 	 */
-	public User(final Address adress, final List<Bill> bills, final float ipc_values) {
+	public User(final Address address, final List<Bill> bills, final float ipc_values) {
+		this(address, bills, ipc_values, null);
+	}
+
+	/**
+	 * Advanced constructor.
+	 * 
+	 * @param adress
+	 *            The address entity.
+	 * @param bills
+	 *            {@link List} of {@link Bill}'s.
+	 * @param ipc_values
+	 *            The amount of the ipc values.
+	 * @param token
+	 *            The token.
+	 */
+	public User(final Address address, final List<Bill> bills, final float ipc_values, final String token) {
 		super();
-		this.setScAdresse(adress);
+		this.setScAdresse(address);
+		this.setBills(bills);
+		this.setIpc_values(ipc_values);
+		this.setToken(token);
 	}
 }
