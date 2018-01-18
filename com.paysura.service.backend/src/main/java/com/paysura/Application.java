@@ -7,7 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -18,6 +20,7 @@ import com.paysura.controller.secure.SecureController;
 
 @SpringBootApplication
 @EnableNeo4jRepositories
+@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 @ComponentScan("com.paysura.controller")
 public class Application {
 
@@ -38,13 +41,5 @@ public class Application {
 
 		};
 	}
-	
-	@Bean
-	public Configuration getConfiguration() {
-	   Configuration config = new Configuration();
-	   config
-	       .driverConfiguration()
-	       .setURI("bolt://neo4j:neo4j@81.169.239.11");
-	   return config;
-	}
+
 }
