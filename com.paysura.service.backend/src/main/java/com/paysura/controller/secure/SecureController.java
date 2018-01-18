@@ -47,7 +47,7 @@ public class SecureController {
 	public ResponseEntity<User> login(@Validated(Credential.New.class) @RequestBody final Credential credential) {
 		ResponseEntity<User> response;
 
-		return response;
+		return null;
 	}
 
 }

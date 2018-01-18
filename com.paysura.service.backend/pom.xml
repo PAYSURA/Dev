@@ -15,7 +15,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.5.9.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
 	<properties>
@@ -27,15 +27,23 @@
 	</properties>
 
 	<dependencies>
-	   <dependency>
-                <groupId>com.sun.mail</groupId>
-                <artifactId>javax.mail</artifactId>
-            </dependency>
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.neo4j</groupId>
+			<artifactId>neo4j-jdbc</artifactId>
+			<version>2.3.2</version>
+		</dependency>
 
 
 		<dependency>
@@ -53,8 +61,8 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
-				<dependency>
+
+		<dependency>
 			<groupId>org.neo4j</groupId>
 			<artifactId>neo4j-ogm-core</artifactId>
 		</dependency>
@@ -64,26 +72,46 @@
 			<artifactId>hibernate-jpa-2.0-api</artifactId>
 			<version>${org.hibernate.jpa.version}</version>
 		</dependency>
-
 		<dependency>
+			<scope>runtime</scope>
 			<groupId>org.neo4j</groupId>
 			<artifactId>neo4j-ogm-bolt-driver</artifactId>
 			<version>${neo4j-ogm.version}</version>
 		</dependency>
-
-<!-- 
 		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-neo4j</artifactId>
+
+		</dependency>
+		<dependency>
+			<groupId>org.neo4j</groupId>
+			<artifactId>neo4j-ogm-embedded-driver</artifactId>
+			<version>3.0.0</version>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>-->
+		<dependency>
+			<groupId>org.neo4j</groupId>
+			<artifactId>neo4j-ogm-http-driver</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 
-	-->
-		<dependency>
-			<groupId>org.scala-lang</groupId>
-			<artifactId>scala-library</artifactId>
-			<version>2.11.0</version>
-		</dependency>
 	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>neo4j-public</id>
+			<url>http://m2.neo4j.org/content/groups/public</url>
+			<releases>
+				<enabled>true</enabled>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+		</repository>
+	</repositories>
+
 
 	<build>
 		<plugins>

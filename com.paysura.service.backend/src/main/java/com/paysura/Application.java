@@ -2,6 +2,7 @@ package com.paysura;
 
 import java.util.Arrays;
 
+import org.neo4j.ogm.config.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -11,10 +12,12 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScans;
+import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
 
 import com.paysura.controller.secure.SecureController;
 
 @SpringBootApplication
+@EnableNeo4jRepositories
 @ComponentScan("com.paysura.controller")
 public class Application {
 
@@ -34,5 +37,14 @@ public class Application {
 			}
 
 		};
+	}
+	
+	@Bean
+	public Configuration getConfiguration() {
+	   Configuration config = new Configuration();
+	   config
+	       .driverConfiguration()
+	       .setURI("bolt://neo4j:neo4j@81.169.239.11");
+	   return config;
 	}
 }
