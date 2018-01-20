@@ -21,30 +21,25 @@ import lombok.Data;
 
 @NodeEntity
 @Data
-public class User{
+public class User {
 
 	@GraphId
 	@Transient
 	@JsonIgnoreProperties
 	Long id;
 
-	@Property(name = "Token")
 	private String token;
 
-	@Property(name = "SmartContractAdress")
-	@Relationship(type = "HAS_A", direction = Relationship.INCOMING)
+	@Relationship(type = RelationshipType.HAS_A, direction = Relationship.UNDIRECTED)
 	private Address scAdresse;
 
-	@Property(name = "bills")
+	@Relationship(type = RelationshipType.HAS_SOME, direction = Relationship.INCOMING)
 	private List<Bill> bills;
 
-	@Property(name = "IPC")
 	private float ipc_values;
 
-	@Property(name = "Email")
 	private String email;
-
-	@Property(name = "Password")
+ 
 	private String password;
 
 	/**

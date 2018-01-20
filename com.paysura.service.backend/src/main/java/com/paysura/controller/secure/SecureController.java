@@ -71,20 +71,18 @@ public class SecureController {
 		User dbCheck = this.userRepository.findUserByEmail(credential.getEmail());
 		ResponseEntity<Boolean> response;
 		if (dbCheck != null) {
-			LOGGER.warn("Cannot create user with email {0}, because entry is already in database",
+			LOGGER.warn("Cannot create user with email {}, because entry is already in database",
 					credential.getEmail());
 			response = ResponseEntity.badRequest().body(false);
 		} else {
-			User user = new User();
-			user.setEmail(credential.getEmail());
-			user.setPassword(credential.getPassword());
+			User user = new User(credential);
 			user.setToken(SecureUtil.generateSecureUserToken());
 			boolean result = this.userRepository.save(user) != null;
 			if (result) {
-				LOGGER.info("User with email address {0} has been registered successful", credential.getEmail());
+				LOGGER.info("User with email address {} has been registered successful", credential.getEmail());
 				response = ResponseEntity.ok(true);
 			} else {
-				LOGGER.error("User with email address {0} has been not registered successful", credential.getEmail());
+				LOGGER.error("User with email address {} has been not registered successful", credential.getEmail());
 				response = ResponseEntity.badRequest().body(false);
 			}
 		}
