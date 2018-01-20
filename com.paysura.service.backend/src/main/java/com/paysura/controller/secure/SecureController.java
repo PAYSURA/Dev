@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.paysura.domain.secure.Credential;
+import com.paysura.domain.secure.RegisterValues;
 import com.paysura.domain.user.User;
 import com.paysura.service.user.UserRepository;
 import com.paysura.util.secure.SecureUtil;
@@ -63,11 +64,12 @@ public class SecureController {
 	 * will fail.
 	 * 
 	 * @param credential
-	 *            The credentials.
+	 *            The {@link RegisterValues} for credentials.
 	 * @return True if success, false else.
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/register", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<Boolean> register(@Validated(Credential.New.class) @RequestBody final Credential credential) {
+	public ResponseEntity<Boolean> register(
+			@Validated(Credential.New.class) @RequestBody final RegisterValues credential) {
 		User dbCheck = this.userRepository.findUserByEmail(credential.getEmail());
 		ResponseEntity<Boolean> response;
 		if (dbCheck != null) {
@@ -77,6 +79,7 @@ public class SecureController {
 		} else {
 			User user = new User(credential);
 			user.setToken(SecureUtil.generateSecureUserToken());
+			user.setScAdresse(credential.getAddress());
 			boolean result = this.userRepository.save(user) != null;
 			if (result) {
 				LOGGER.info("User with email address {} has been registered successful", credential.getEmail());

@@ -13,6 +13,7 @@ import com.paysura.domain.secure.Credential;
 import com.paysura.domain.user.address.Address;
 import com.paysura.domain.user.address.Country;
 import com.paysura.domain.user.address.FederalState;
+import com.paysura.util.secure.SecureUtil;
 
 import junit.framework.TestCase;
 

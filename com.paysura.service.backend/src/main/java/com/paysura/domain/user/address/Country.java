@@ -7,7 +7,6 @@ import java.util.Locale;
 
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Property;
 
 import lombok.Data;
 
@@ -23,7 +22,6 @@ public class Country {
 	@GraphId
 	private Long id;
 
-	@Property(name = "name")
 	private String name;
 
 	/**

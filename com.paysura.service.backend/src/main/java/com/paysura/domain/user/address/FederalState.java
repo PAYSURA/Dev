@@ -5,7 +5,6 @@ package com.paysura.domain.user.address;
 
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Property;
 import org.neo4j.ogm.annotation.Relationship;
 
 import com.paysura.util.type.RelationshipType;
@@ -25,10 +24,8 @@ public class FederalState {
 	private Long id;
 
 	@Relationship(type = RelationshipType.BELONGS_TO, direction = Relationship.INCOMING)
-	@Property(name = "country")
 	private Country country;
 
-	@Property(name = "name")
 	private String name;
 
 	/**

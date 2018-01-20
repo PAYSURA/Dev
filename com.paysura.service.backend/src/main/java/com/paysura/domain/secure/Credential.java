@@ -9,9 +9,10 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.paysura.domain.validator.credential.api.EmailValidator;
 import com.paysura.util.secure.SecureUtil;
 
@@ -30,10 +31,12 @@ public class Credential implements Serializable {
 	public static final int pwdMaxLength = 30;
 
 	@NotNull(groups = { Existing.class, New.class })
+	@NotBlank
 	@EmailValidator(message = "Email address is not valid", groups = { Existing.class, New.class })
 	private String email;
 
 	@NotNull
+	@NotBlank
 	@Min(value = Credential.pwdMinLength)
 	@Max(value = Credential.pwdMaxLength)
 	private String password;

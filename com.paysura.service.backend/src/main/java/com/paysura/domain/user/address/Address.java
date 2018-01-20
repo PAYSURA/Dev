@@ -2,7 +2,6 @@ package com.paysura.domain.user.address;
 
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Property;
 import org.neo4j.ogm.annotation.Relationship;
 
 import com.paysura.util.type.RelationshipType;
@@ -16,13 +15,10 @@ public class Address {
 	@GraphId
 	private Long id;
 
-	@Property(name = "street")
 	private String street;
 
-	@Property(name = "house_number")
 	private String houseNumber;
 
-	@Property(name = "federal_state")
 	@Relationship(type = RelationshipType.BELONGS_TO, direction = Relationship.INCOMING)
 	private FederalState federalState;
 
