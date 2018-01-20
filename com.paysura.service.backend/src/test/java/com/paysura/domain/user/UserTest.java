@@ -7,6 +7,9 @@ import static org.junit.Assert.assertNotEquals;
 
 import java.util.Locale;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.paysura.domain.secure.Credential;
 import com.paysura.domain.user.address.Address;
 import com.paysura.domain.user.address.Country;
 import com.paysura.domain.user.address.FederalState;
@@ -47,6 +50,10 @@ public class UserTest extends TestCase {
 		assertEquals("Teststr.", user.getScAdresse().getStreet());
 		assertNotNull(user.getScAdresse().getFederalState().getCountry());
 		assertEquals(Locale.GERMANY.getCountry(), user.getScAdresse().getFederalState().getCountry().getName());
+		Credential credential = new Credential("test@test.de", "test1234");
+		GsonBuilder builder = new GsonBuilder();
+		Gson gson = builder.create();
+		System.out.println(gson.toJson(credential));
 	}
 
 }

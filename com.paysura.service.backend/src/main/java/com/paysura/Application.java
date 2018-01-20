@@ -18,10 +18,9 @@ import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
 
 import com.paysura.controller.secure.SecureController;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = { "com.paysura" })
 @EnableNeo4jRepositories
 @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
-@ComponentScan("com.paysura.controller")
 public class Application {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(Application.class);

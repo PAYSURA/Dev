@@ -9,6 +9,9 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.paysura.domain.validator.credential.api.EmailValidator;
 import com.paysura.util.secure.SecureUtil;
 
@@ -50,7 +53,9 @@ public class Credential implements Serializable {
 	 * @param password
 	 *            The password.
 	 */
-	public Credential(final String email, final String password) {
+	@JsonCreator
+	public Credential(final @JsonProperty("email") String email,
+			final @JsonProperty(value = "password") String password) {
 		this.setEmail(email);
 		this.setPassword(SecureUtil.hashPassword(password));
 	}

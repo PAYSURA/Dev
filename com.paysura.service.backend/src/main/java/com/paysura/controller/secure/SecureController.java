@@ -3,7 +3,7 @@
  */
 package com.paysura.controller.secure;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.paysura.domain.secure.Credential;
 import com.paysura.domain.user.User;
+import com.paysura.service.user.UserRepository;
 
 import lombok.Data;
 
@@ -30,6 +31,9 @@ import lombok.Data;
 @RequestMapping("/secure")
 public class SecureController {
 
+	@Autowired
+	private UserRepository userRepository;
+
 	@RequestMapping(method = RequestMethod.GET, value = "/", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<String> index() {
 		return new ResponseEntity<String>("Hello from Secure Controller", HttpStatus.OK);
@@ -43,10 +47,10 @@ public class SecureController {
 	 *            The credentials.
 	 * @return {@link User} if successfull, null else.
 	 */
-	@PostMapping
+	@RequestMapping(method = RequestMethod.POST, value = "/login", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<User> login(@Validated(Credential.New.class) @RequestBody final Credential credential) {
 		ResponseEntity<User> response;
-
+		User user = this.userRepository.findUserByEmailAndPassword(credential.getEmail(), credential.getPassword());
 		return null;
 	}
 

@@ -1,5 +1,6 @@
 package com.paysura.domain.user;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import org.neo4j.ogm.annotation.Property;
 import org.neo4j.ogm.annotation.Relationship;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.paysura.domain.secure.Credential;
 import com.paysura.domain.user.address.Address;
 import com.paysura.domain.user.bill.Bill;
 import com.paysura.util.type.RelationshipType;
@@ -19,14 +21,16 @@ import lombok.Data;
 
 @NodeEntity
 @Data
-public class User {
+public class User implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@GraphId
-    @Transient
-    @JsonIgnoreProperties
+	@Transient
+	@JsonIgnoreProperties
 	Long id;
 
-	@Property(name="Token")
+	@Property(name = "Token")
 	private String token;
 
 	@Property(name = "SmartContractAdress")
@@ -39,11 +43,28 @@ public class User {
 	@Property(name = "IPC")
 	private float ipc_values;
 
+	@Property(name = "Email")
+	private String email;
+
+	@Property(name = "Password")
+	private String password;
+
 	/**
 	 * Default constructor.
 	 */
 	public User() {
 		this(new Address(), new ArrayList<Bill>(), 0f);
+	}
+
+	/**
+	 * Special constructor for login.
+	 * 
+	 * @param credential
+	 *            The credentials.
+	 */
+	public User(final Credential credential) {
+		this.setEmail(credential.getEmail());
+		this.setPassword(credential.getPassword());
 	}
 
 	/**
