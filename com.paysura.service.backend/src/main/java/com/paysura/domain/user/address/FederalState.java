@@ -35,7 +35,7 @@ public class FederalState {
 	 * No-arg constructor.
 	 */
 	public FederalState() {
-		this(null, "");
+		this(new Country(), "");
 	}
 
 	/**

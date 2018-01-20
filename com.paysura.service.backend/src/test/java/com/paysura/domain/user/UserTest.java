@@ -50,10 +50,6 @@ public class UserTest extends TestCase {
 		assertEquals("Teststr.", user.getScAdresse().getStreet());
 		assertNotNull(user.getScAdresse().getFederalState().getCountry());
 		assertEquals(Locale.GERMANY.getCountry(), user.getScAdresse().getFederalState().getCountry().getName());
-		Credential credential = new Credential("test@test.de", "test1234");
-		GsonBuilder builder = new GsonBuilder();
-		Gson gson = builder.create();
-		System.out.println(gson.toJson(credential));
 	}
 
 }

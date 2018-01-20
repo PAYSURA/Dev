@@ -30,7 +30,7 @@ public class Country {
 	 * Private no arg constructor.
 	 */
 	public Country() {
-		this(null);
+		this(Locale.GERMANY);
 	}
 
 	/**

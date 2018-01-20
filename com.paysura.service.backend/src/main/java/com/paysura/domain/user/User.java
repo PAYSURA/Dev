@@ -21,9 +21,7 @@ import lombok.Data;
 
 @NodeEntity
 @Data
-public class User implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class User{
 
 	@GraphId
 	@Transient
@@ -34,7 +32,7 @@ public class User implements Serializable {
 	private String token;
 
 	@Property(name = "SmartContractAdress")
-	@Relationship(type = RelationshipType.HAS_A, direction = Relationship.UNDIRECTED)
+	@Relationship(type = "HAS_A", direction = Relationship.INCOMING)
 	private Address scAdresse;
 
 	@Property(name = "bills")

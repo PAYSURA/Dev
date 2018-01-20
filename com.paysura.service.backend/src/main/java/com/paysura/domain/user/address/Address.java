@@ -30,7 +30,7 @@ public class Address {
 	 * Default constructor.
 	 */
 	public Address() {
-		this("", "", null);
+		this("", "", new FederalState());
 	}
 
 	/**
