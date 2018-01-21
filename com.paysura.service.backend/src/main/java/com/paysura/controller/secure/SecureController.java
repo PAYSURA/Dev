@@ -102,40 +102,4 @@ public class SecureController {
 		}
 		return response;
 	}
-
-	/**
-	 * Updates email, password and address from the {@link User}. The credentials
-	 * email and password will be used for fetching the User inside the database.
-	 * 
-	 * @param user
-	 *            The new user parameter inside the body.
-	 * @param auth
-	 *            The Authentication value inside the header.
-	 * @return {@link ResponseEntity<User>} or null
-	 * @throws InvalidJwtTokenException
-	 *             If {@link Jwt} token is not valid.
-	 */
-	@RequestMapping(method = RequestMethod.PUT, value = "/update", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<User> update(final @RequestBody User user,
-			final @RequestHeader(value = "Authorization") String auth) {
-		JWTUtil.isTokenValid(auth);
-		User result;
-		if (null == user || user.getEmail() == null || user.getEmail().isEmpty()) {
-			LOGGER.info("Cannot update user because entity or required parameters are empty");
-			result = null;
-		} else {
-			User userDb = this.userRepository.findUserByEmailAndPassword(user.getEmail(), user.getPassword());
-			if (userDb == null) {
-				LOGGER.error("Cannot update user because not found in the database");
-				result = null;
-			} else {
-				userDb.setEmail(user.getEmail());
-				userDb.setPassword(user.getPassword());
-				userDb.setScAdresse(user.getScAdresse());
-				this.userRepository.save(userDb);
-				result = userDb;
-			}
-		}
-		return ResponseEntity.ok(result);
-	}
 }
