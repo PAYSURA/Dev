@@ -22,8 +22,8 @@ import io.jsonwebtoken.impl.crypto.MacProvider;
  */
 public final class JWTUtil {
 
-	private static final String JWT_SUBJECT = "PAYSURA";
 	private static final Logger LOGGER = LoggerFactory.getLogger(JWTUtil.class);
+	private static Key key = MacProvider.generateKey();
 
 	/**
 	 *
@@ -32,11 +32,8 @@ public final class JWTUtil {
 	 * @return {@link Jwt} token.
 	 */
 	public static final String signJWT(final String payload) {
-		Key key = MacProvider.generateKey();
-
-		String jwt = Jwts.builder().setSubject(JWTUtil.JWT_SUBJECT).setPayload(payload)
-				.signWith(SignatureAlgorithm.HS512, key).compact();
-		assert Jwts.parser().setSigningKey(key).parseClaimsJws(jwt).getBody().getSubject().equals(JWTUtil.JWT_SUBJECT);
+		String jwt = Jwts.builder().setPayload(payload).signWith(SignatureAlgorithm.HS512, JWTUtil.key).compact();
+		assert Jwts.parser().setSigningKey(JWTUtil.key).parseClaimsJws(jwt).getBody().equals(payload);
 		return jwt;
 	}
 
@@ -50,7 +47,7 @@ public final class JWTUtil {
 	public static final boolean isValid(final String jwt) {
 		boolean result;
 		try {
-			Jwts.parser().setSigningKey(JWTUtil.JWT_SUBJECT).parseClaimsJws(jwt);
+			Jwts.parser().setSigningKey(JWTUtil.key).parseClaimsJws(jwt);
 			result = true;
 		} catch (SignatureException e) {
 			result = false;

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.paysura.domain.secure.Credential;
 import com.paysura.domain.secure.RegisterValues;
+import com.paysura.domain.secure.jwt.PSJwt;
 import com.paysura.domain.user.User;
 import com.paysura.service.user.UserRepository;
 import com.paysura.util.jwt.JWTUtil;
@@ -54,8 +55,7 @@ public class SecureController {
 	 * @return {@link User} if successfull, null else.
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/login", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<String> login(
-			@Validated(Credential.Existing.class) @RequestBody final Credential credential) {
+	public ResponseEntity<PSJwt> login(@Validated(Credential.Existing.class) @RequestBody final Credential credential) {
 		String jwt;
 		User user = this.userRepository.findUserByEmailAndPassword(credential.getEmail(), credential.getPassword());
 		if (null == user) {
@@ -63,7 +63,7 @@ public class SecureController {
 		} else {
 			jwt = JWTUtil.signJWT(user.getToken());
 		}
-		return ResponseEntity.ok(jwt);
+		return ResponseEntity.ok(new PSJwt(jwt));
 	}
 
 	/**
