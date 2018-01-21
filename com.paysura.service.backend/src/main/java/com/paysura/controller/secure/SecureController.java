@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,10 +20,12 @@ import com.paysura.domain.secure.Credential;
 import com.paysura.domain.secure.RegisterValues;
 import com.paysura.domain.secure.jwt.PSJwt;
 import com.paysura.domain.user.User;
+import com.paysura.exception.JWT.InvalidJwtTokenException;
 import com.paysura.service.user.UserRepository;
 import com.paysura.util.jwt.JWTUtil;
 import com.paysura.util.secure.SecureUtil;
 
+import io.jsonwebtoken.Jwt;
 import lombok.Data;
 
 /**
@@ -100,8 +103,39 @@ public class SecureController {
 		return response;
 	}
 
+	/**
+	 * Updates email, password and address from the {@link User}. The credentials
+	 * email and password will be used for fetching the User inside the database.
+	 * 
+	 * @param user
+	 *            The new user parameter inside the body.
+	 * @param auth
+	 *            The Authentication value inside the header.
+	 * @return {@link ResponseEntity<User>} or null
+	 * @throws InvalidJwtTokenException
+	 *             If {@link Jwt} token is not valid.
+	 */
 	@RequestMapping(method = RequestMethod.PUT, value = "/update", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<User> update() {
-		return null;
+	public ResponseEntity<User> update(final @RequestBody User user,
+			final @RequestHeader(value = "Authorization") String auth) {
+		JWTUtil.isTokenValid(auth);
+		User result;
+		if (null == user || user.getEmail() == null || user.getEmail().isEmpty()) {
+			LOGGER.info("Cannot update user because entity or required parameters are empty");
+			result = null;
+		} else {
+			User userDb = this.userRepository.findUserByEmailAndPassword(user.getEmail(), user.getPassword());
+			if (userDb == null) {
+				LOGGER.error("Cannot update user because not found in the database");
+				result = null;
+			} else {
+				userDb.setEmail(user.getEmail());
+				userDb.setPassword(user.getPassword());
+				userDb.setScAdresse(user.getScAdresse());
+				this.userRepository.save(userDb);
+				result = userDb;
+			}
+		}
+		return ResponseEntity.ok(result);
 	}
 }

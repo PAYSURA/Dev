@@ -8,6 +8,8 @@ import java.security.Key;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.paysura.exception.JWT.InvalidJwtTokenException;
+
 import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -44,7 +46,7 @@ public final class JWTUtil {
 	 *            The given token.
 	 * @return True, if valid, false else.
 	 */
-	public static final boolean isValid(final String jwt) {
+	private static final boolean isValid(final String jwt) {
 		boolean result;
 		try {
 			Jwts.parser().setSigningKey(JWTUtil.key).parseClaimsJws(jwt);
@@ -54,6 +56,21 @@ public final class JWTUtil {
 			LOGGER.error("JWT token is not valid", e);
 		}
 		return result;
+	}
+
+	/**
+	 * Check and validate an given {@link Jwt} token.
+	 * 
+	 * @param token
+	 *            The JWT token.
+	 * @throws InvalidJwtTokenException
+	 *             Will be thrown, if the token is not valid.
+	 */
+	public static final void isTokenValid(final String token) throws InvalidJwtTokenException {
+		if (!JWTUtil.isValid(token)) {
+			throw new InvalidJwtTokenException("JWT Token is not valid.");
+		}
+
 	}
 
 	/**
