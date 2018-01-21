@@ -31,7 +31,7 @@ public class UserTest extends TestCase {
 		User user = new User();
 		assertNotNull(user);
 		assertNotNull(user.getScAdresse());
-		assertNull(user.getScAdresse().getFederalState());
+		assertNotNull(user.getScAdresse().getFederalState());
 	}
 
 	/**

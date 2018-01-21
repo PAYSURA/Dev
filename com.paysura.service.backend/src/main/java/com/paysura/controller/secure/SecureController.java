@@ -19,6 +19,7 @@ import com.paysura.domain.secure.Credential;
 import com.paysura.domain.secure.RegisterValues;
 import com.paysura.domain.user.User;
 import com.paysura.service.user.UserRepository;
+import com.paysura.util.jwt.JWTUtil;
 import com.paysura.util.secure.SecureUtil;
 
 import lombok.Data;
@@ -53,9 +54,16 @@ public class SecureController {
 	 * @return {@link User} if successfull, null else.
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/login", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<User> login(@Validated(Credential.Existing.class) @RequestBody final Credential credential) {
-		return ResponseEntity
-				.ok(this.userRepository.findUserByEmailAndPassword(credential.getEmail(), credential.getPassword()));
+	public ResponseEntity<String> login(
+			@Validated(Credential.Existing.class) @RequestBody final Credential credential) {
+		String jwt;
+		User user = this.userRepository.findUserByEmailAndPassword(credential.getEmail(), credential.getPassword());
+		if (null == user) {
+			jwt = null;
+		} else {
+			jwt = JWTUtil.signJWT(user.getToken());
+		}
+		return ResponseEntity.ok(jwt);
 	}
 
 	/**
@@ -89,8 +97,11 @@ public class SecureController {
 				response = ResponseEntity.badRequest().body(false);
 			}
 		}
-
 		return response;
 	}
 
+	@RequestMapping(method = RequestMethod.PUT, value = "/update", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<User> update() {
+		return null;
+	}
 }
