@@ -36,7 +36,7 @@ import lombok.Data;
  */
 @Data
 @RestController
-@RequestMapping("/secure")
+@RequestMapping("/user")
 public class UserController {
 
 	@Autowired
