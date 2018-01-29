@@ -30,8 +30,8 @@ import lombok.Data;
 @RequestMapping("/product")
 public class ProductController {
 
-	@Autowired
-	private ProductRepository productRepository;
+	//@Autowired
+	//private ProductRepository productRepository;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
 
@@ -52,7 +52,8 @@ public class ProductController {
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/all", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<Product>> allProducts() {
-		return ResponseEntity.ok(this.productRepository.findAllProducts());
+		//return ResponseEntity.ok(this.productRepository.findAllProducts());
+		return null;
 	}
 
 	/**
@@ -67,7 +68,8 @@ public class ProductController {
 		if (id == null || id < 0) {
 			return ResponseEntity.badRequest().body(null);
 		} else {
-			return ResponseEntity.ok(this.productRepository.findOne(id));
+		//	return ResponseEntity.ok(this.productRepository.findOne(id));
+			return null;
 		}
 	}
 	
@@ -83,7 +85,8 @@ public class ProductController {
 		if (name == null || name.isEmpty()) {
 			return ResponseEntity.badRequest().body(null);
 		} else {
-			return ResponseEntity.ok(this.productRepository.findProductByProductName(name));
+			//return ResponseEntity.ok(this.productRepository.findProductByProductName(name));
+			return null;
 		}
 	}
 }
