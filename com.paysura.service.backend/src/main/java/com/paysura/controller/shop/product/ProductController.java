@@ -69,8 +69,7 @@ public class ProductController {
 		if (id == null || id < 0) {
 			return ResponseEntity.badRequest().body(null);
 		} else {
-			// return ResponseEntity.ok(this.productRepository.findOne(id));
-			return null;
+			return ResponseEntity.ok(this.productRepository.findOne(id));
 		}
 	}
 
@@ -86,9 +85,7 @@ public class ProductController {
 		if (name == null || name.isEmpty()) {
 			return ResponseEntity.badRequest().body(null);
 		} else {
-			// return
-			// ResponseEntity.ok(this.productRepository.findProductByProductName(name));
-			return null;
+			return ResponseEntity.ok(this.productRepository.findProductByProductName(name));
 		}
 	}
 }
