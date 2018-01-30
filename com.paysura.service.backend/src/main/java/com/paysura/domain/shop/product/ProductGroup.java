@@ -5,6 +5,9 @@ import java.util.Set;
 
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
+
+import com.paysura.util.type.RelationshipType;
 
 import lombok.Data;
 
@@ -15,13 +18,16 @@ public class ProductGroup {
 	@GraphId
 	private Long id;
 
+	private String productGroupName;
+
+	@Relationship(type = RelationshipType.HAS, direction = Relationship.INCOMING)
 	private Set<Product> products;
 
 	/**
 	 * Default constructor.
 	 */
 	public ProductGroup() {
-		this(new HashSet<>());
+		this(new HashSet<>(), "");
 	}
 
 	/**
@@ -29,10 +35,13 @@ public class ProductGroup {
 	 * 
 	 * @param products
 	 *            Set of {@link Product}, which belongs to a group.
+	 * @param productGroupName
+	 *            The name of the product group name.
 	 */
-	public ProductGroup(final Set<Product> products) {
+	public ProductGroup(final Set<Product> products, final String productGroupName) {
 		super();
 		this.setProducts(products);
+		this.setProductGroupName(productGroupName);
 	}
 
 }
