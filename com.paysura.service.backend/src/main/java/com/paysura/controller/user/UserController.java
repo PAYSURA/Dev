@@ -9,21 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.paysura.domain.secure.Credential;
-import com.paysura.domain.secure.RegisterValues;
-import com.paysura.domain.secure.jwt.PSJwt;
 import com.paysura.domain.user.User;
 import com.paysura.exception.JWT.InvalidJwtTokenException;
 import com.paysura.service.user.UserRepository;
 import com.paysura.util.jwt.JWTUtil;
-import com.paysura.util.secure.SecureUtil;
 
 import io.jsonwebtoken.Jwt;
 import lombok.Data;

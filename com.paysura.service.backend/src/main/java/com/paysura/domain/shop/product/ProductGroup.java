@@ -27,7 +27,17 @@ public class ProductGroup {
 	 * Default constructor.
 	 */
 	public ProductGroup() {
-		this(new HashSet<>(), "");
+		this("");
+	}
+
+	/**
+	 * Constructor with one parameter.
+	 * 
+	 * @param productGroupName
+	 *            The name of the group.
+	 */
+	public ProductGroup(final String productGroupName) {
+		this(new HashSet<>(), productGroupName);
 	}
 
 	/**
