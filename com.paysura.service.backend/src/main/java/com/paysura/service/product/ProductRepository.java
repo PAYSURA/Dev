@@ -22,7 +22,7 @@ public interface ProductRepository extends GraphRepository<Product> {
 	 * 
 	 * @return Products.
 	 */
-	//List<Product> findAllProducts();
+	List<Product> findAll();
 
 	/**
 	 * Search for an {@link Product} within it's product name.
@@ -31,5 +31,5 @@ public interface ProductRepository extends GraphRepository<Product> {
 	 *            The name of the product.
 	 * @return {@link Product} if success, null else.
 	 */
-	//Product findProductByProductName(final String productName);
+	Product findProductByProductName(final String productName);
 }

@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.paysura.domain.shop.product.Product;
 import com.paysura.service.product.ProductRepository;
+
 import lombok.Data;
 
 /**
@@ -30,8 +32,8 @@ import lombok.Data;
 @RequestMapping("/product")
 public class ProductController {
 
-	//@Autowired
-	//private ProductRepository productRepository;
+	@Autowired
+	private ProductRepository productRepository;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
 
@@ -52,8 +54,7 @@ public class ProductController {
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/all", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<Product>> allProducts() {
-		//return ResponseEntity.ok(this.productRepository.findAllProducts());
-		return null;
+		return ResponseEntity.ok(this.productRepository.findAll());
 	}
 
 	/**
@@ -68,11 +69,10 @@ public class ProductController {
 		if (id == null || id < 0) {
 			return ResponseEntity.badRequest().body(null);
 		} else {
-		//	return ResponseEntity.ok(this.productRepository.findOne(id));
-			return null;
+			return ResponseEntity.ok(this.productRepository.findOne(id));
 		}
 	}
-	
+
 	/**
 	 * Search for one special {@link Product} within it's internal id.
 	 * 
@@ -85,8 +85,7 @@ public class ProductController {
 		if (name == null || name.isEmpty()) {
 			return ResponseEntity.badRequest().body(null);
 		} else {
-			//return ResponseEntity.ok(this.productRepository.findProductByProductName(name));
-			return null;
+			return ResponseEntity.ok(this.productRepository.findProductByProductName(name));
 		}
 	}
 }
