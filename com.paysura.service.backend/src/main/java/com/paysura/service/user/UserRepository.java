@@ -35,4 +35,13 @@ public interface UserRepository extends GraphRepository<User> {
 	 * @return {@link User} if success, null else.
 	 */
 	public User findUserByEmail(final String email);
+
+	/**
+	 * Search for one {@link User} within it's user token.
+	 * 
+	 * @param userToken
+	 *            The token belonging to the {@link User}.
+	 * @return {@link User} if success, null else.
+	 */
+	public User findUserByUserToken(final String userToken);
 }

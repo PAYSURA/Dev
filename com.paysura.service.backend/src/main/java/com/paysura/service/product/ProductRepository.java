@@ -32,4 +32,5 @@ public interface ProductRepository extends GraphRepository<Product> {
 	 * @return {@link Product} if success, null else.
 	 */
 	Product findProductByProductName(final String productName);
+
 }
