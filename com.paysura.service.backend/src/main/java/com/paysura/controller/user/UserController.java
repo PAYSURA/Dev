@@ -78,7 +78,7 @@ public class UserController {
 			response = ResponseEntity.badRequest().body(null);
 			LOGGER.warn("Cannot add product to user, because the parameter arent valid");
 		} else {
-			User user = this.userRepository.findUserByUserToken(user_token);
+			User user = this.userRepository.findUserByToken(user_token);
 			Product product = this.productRepository.findOne(product_id);
 			if (null == user || null == product) {
 				response = ResponseEntity.badRequest().body(null);
