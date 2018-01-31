@@ -91,6 +91,33 @@ public class ProductGroupController {
 	}
 
 	/**
+	 * Removes an {@link ProductGroup} from the database.
+	 * 
+	 * @return {@link List} of {@link Product}.
+	 */
+	@RequestMapping(method = RequestMethod.DELETE, value = "/remove", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<ProductGroup>> removeProductGroup(@RequestBody ProductGroupJson input,
+			final @RequestHeader(value = "Authorization") String auth) {
+		JWTUtil.isTokenValid(auth);
+		ResponseEntity<List<ProductGroup>> result;
+		ProductGroup group = this.productGroupRepository.findOneByProductGroupName(input.getProductGroupName());
+		if (group == null) {
+			LOGGER.warn("ProductGroup in not in the list {}", input.getProductGroupName());
+			result = ResponseEntity.badRequest().body(new ArrayList<>());
+		} else {
+			try {
+				this.productGroupRepository.delete(group.getId());
+				result = ResponseEntity.ok(null);
+			} catch (final Exception e) {
+				LOGGER.error("Error while deleting new prodcut group", e);
+				result = ResponseEntity.badRequest().body(new ArrayList<>());
+			}
+		}
+		return result;
+
+	}
+
+	/**
 	 * Checks if an productGroupName is inside a List.
 	 * 
 	 * @param list
