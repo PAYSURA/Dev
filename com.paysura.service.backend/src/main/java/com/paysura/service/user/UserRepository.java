@@ -43,5 +43,5 @@ public interface UserRepository extends GraphRepository<User> {
 	 *            The token belonging to the {@link User}.
 	 * @return {@link User} if success, null else.
 	 */
-	public User findUserByUserToken(final String userToken);
+	public User findUserByToken(final String userToken);
 }
