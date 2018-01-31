@@ -74,6 +74,29 @@ public class ProductController {
 	}
 
 	/**
+	 * Removes an {@link Product} within an id.
+	 * 
+	 * @param id
+	 *            The id of the product.
+	 * @return True, if success, false else.
+	 */
+	@RequestMapping(method = RequestMethod.DELETE, value = "/delete", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Boolean> delete(final @PathVariable("productId") Long id) {
+		if (id == null || id < 0) {
+			return ResponseEntity.badRequest().body(false);
+		} else {
+			Product product = this.productRepository.findOne(id);
+			if (null == product) {
+				LOGGER.error("Cannot delete product with id {} because it is not in the database", id);
+				return ResponseEntity.badRequest().body(false);
+			} else {
+				this.productRepository.delete(product);
+				return ResponseEntity.ok(true);
+			}
+		}
+	}
+
+	/**
 	 * Search for one special {@link Product} within it's internal id.
 	 * 
 	 * @param id
