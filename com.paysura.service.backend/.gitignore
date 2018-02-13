@@ -89,3 +89,4 @@ secrets.yml
 .scala_dependencies
 .worksheet
 
+src/main/resources/secure
