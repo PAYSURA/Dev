@@ -43,7 +43,7 @@ public class SecureController {
 
 	@RequestMapping(method = RequestMethod.GET, value = "/", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<String> index() {
-		return new ResponseEntity<String>("Hello from Secure Controller", HttpStatus.OK);
+		return new ResponseEntity<>("Hello from Secure Controller", HttpStatus.OK);
 	}
 
 	/**

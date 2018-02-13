@@ -3,8 +3,6 @@
  */
 package com.paysura.controller.user.bill;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -31,8 +29,6 @@ public class BillController {
 	@Autowired
 	private UserRepository userRepository;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(BillController.class);
-
 	/**
 	 * Dummy function for the health check.
 	 * 
@@ -40,6 +36,6 @@ public class BillController {
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<String> index() {
-		return new ResponseEntity<String>("Hello from Bill Controller", HttpStatus.OK);
+		return new ResponseEntity<>("Hello from Bill Controller", HttpStatus.OK);
 	}
 }

@@ -44,7 +44,7 @@ public class ProductController {
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<String> index() {
-		return new ResponseEntity<String>("Hello from Product Controller", HttpStatus.OK);
+		return new ResponseEntity<>("Hello from Product Controller", HttpStatus.OK);
 	}
 
 	/**

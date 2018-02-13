@@ -50,7 +50,7 @@ public class ProductGroupController {
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<String> index() {
-		return new ResponseEntity<String>("Hello from Product Group Controller", HttpStatus.OK);
+		return new ResponseEntity<>("Hello from Product Group Controller", HttpStatus.OK);
 	}
 
 	/**
@@ -127,7 +127,7 @@ public class ProductGroupController {
 	 * @return True, if success, false else.
 	 */
 	private boolean containsName(final List<ProductGroup> list, final String name) {
-		return list.stream().filter(o -> o.getProductGroupName().equals(name)).findFirst().isPresent();
+		return list.stream().anyMatch(o -> o.getProductGroupName().equals(name));
 	}
 
 	/**
